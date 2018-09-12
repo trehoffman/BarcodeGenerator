@@ -27,7 +27,7 @@
             var barcode = barcodes[i];
             var barcode_id = "barcode" + i.toString();
             target.innerHTML += '<div><svg id="' + barcode_id + '"></svg></div>';
-            JsBarcode("#" + barcode_id, '+-IV-' + barcode.data);
+            JsBarcode("#" + barcode_id, barcode.data);
         }
     </script>
 </body>
