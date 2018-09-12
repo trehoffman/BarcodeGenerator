@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Barcode</title>
+    <style>
+        body{
+            margin:50px;
+        }
+
+        div {
+            margin-bottom:100px
+        }
+
+        #barcodes div:nth-child(odd) {
+            float:right;
+        }
+    </style>
+</head>
+<body>
+    <div id="barcodes"></div>
+    <script src="js/JsBarcode.all.min.js"></script>
+    <script>
+        var params = new URLSearchParams(window.location.search);
+        var barcodes = JSON.parse(params.get("barcodes"));
+        console.log(barcodes);
+        var target = document.querySelector("#barcodes");
+        for (var i = 0; i < barcodes.length; i++) {
+            var barcode = barcodes[i];
+            var barcode_id = "barcode" + i.toString();
+            target.innerHTML += '<div><svg id="' + barcode_id + '"></svg></div>';
+            JsBarcode("#" + barcode_id, '+-IV-' + barcode.data);
+        }
+    </script>
+</body>
+</html>

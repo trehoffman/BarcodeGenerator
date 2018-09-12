@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>Barcode Generator</title>
+</head>
+<body>
+    <div>
+        <textarea id="barcodes"></textarea>
+    </div>
+    <div>
+        <button type="button" onclick="generateBarcodes();">Generate</button>
+    </div>
+    <script>
+        function generateBarcodes() {
+            var barcodes = [];
+            var x = document.querySelector('#barcodes').value.trim();
+            var y = x.split('\n');
+            for (var i = 0; i < y.length; i++) {
+                var data = y[i].trim();
+                barcodes.push({ "data": data })
+            }
+            if (barcodes.length > 0) {
+                location.href = 'generate_barcodes.html?barcodes=' + encodeURIComponent(JSON.stringify(barcodes));
+            }
+        }
+    </script>
+</body>
+</html>
