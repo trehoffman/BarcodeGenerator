@@ -1,13 +1,24 @@
 <html>
 <head>
     <title>Barcode Generator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/w3.css"/>
+    <style>
+        button.w3-button:focus {
+            background-color:gray;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <textarea id="barcodes"></textarea>
+    <div class="w3-container">
+        <h1>Barcode Generator</h1>
     </div>
-    <div>
-        <button type="button" onclick="generateBarcodes();">Generate</button>
+    <div class="w3-container">
+        <textarea id="barcodes" class="w3-input w3-border" placeholder="enter barcode data (one barcode per line)" autofocus></textarea>
+        <div class="w3-margin-top">
+            <button type="button" class="w3-button w3-block" onclick="generateBarcodes();">Generate</button>
+        </div>
     </div>
     <script>
         function generateBarcodes() {
