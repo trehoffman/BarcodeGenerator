@@ -2,16 +2,16 @@
 <head>
     <title>Barcodes</title>
     <style>
-        body{
+        .page {
             margin:50px;
+            display: grid;
+            grid-template-columns: auto auto;
         }
 
-        div {
-            margin-bottom:100px
-        }
-
-        #barcodes div:nth-child(odd) {
-            float:right;
+        @media print {
+            .page {
+                page-break-after: always;
+            } 
         }
     </style>
 </head>
@@ -21,13 +21,35 @@
     <script>
         var params = new URLSearchParams(window.location.search);
         var barcodes = JSON.parse(params.get("barcodes"));
-        console.log(barcodes);
         var target = document.querySelector("#barcodes");
-        for (var i = 0; i < barcodes.length; i++) {
-            var barcode = barcodes[i];
-            var barcode_id = "barcode" + i.toString();
-            target.innerHTML += '<div><svg id="' + barcode_id + '"></svg></div>';
-            JsBarcode("#" + barcode_id, barcode.data);
+        var barcodes_per_page = 12;
+        
+        populate();
+
+        function getHtml() {
+            var html = '';
+            for (var i = 0; i < barcodes.length; i++) {
+                var barcode = barcodes[i];
+                var barcode_id = "barcode" + i.toString();
+
+                if (i%barcodes_per_page == 0) {
+                    html += '<div class="page">';
+                }
+                html += '<div><svg id="' + barcode_id + '"></svg></div>';
+                if (i%barcodes_per_page == (barcodes_per_page-1)) {
+                    html += '</div>';
+                }
+            }
+            return html;
+        }
+
+        function populate() {
+            target.innerHTML = getHtml();
+            for (var i = 0; i < barcodes.length; i++) {
+                var barcode = barcodes[i];
+                var barcode_id = "barcode" + i.toString();
+                JsBarcode("#" + barcode_id, barcode.data);
+            }
         }
     </script>
 </body>
