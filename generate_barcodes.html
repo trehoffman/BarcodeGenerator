@@ -3,13 +3,20 @@
     <title>Barcodes</title>
     <style>
         .page {
-            margin:50px;
+            margin-top:35px;
             display: grid;
             grid-template-columns: auto auto;
+            column-gap:15px;
+            row-gap:50px;
+        }
+
+        .page div {
+            text-align:center;
         }
 
         @media print {
             .page {
+                size: letter portrait;
                 page-break-after: always;
             } 
         }
@@ -22,7 +29,7 @@
         var params = new URLSearchParams(window.location.search);
         var barcodes = JSON.parse(params.get("barcodes"));
         var target = document.querySelector("#barcodes");
-        var barcodes_per_page = 12;
+        var barcodes_per_page = 10;
         
         populate();
 
